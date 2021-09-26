@@ -1,7 +1,11 @@
 /* libraries*/
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <string.h>
+#include <unistd.h>
+
 /* Flags*/
-//I do not know how flags work :D
+struct flags{
+	bool line_numbers;
+	} p_flags;
