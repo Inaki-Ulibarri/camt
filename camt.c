@@ -23,7 +23,7 @@ void print_version(){
     exit(0);
 }
 
-/* Prints the intered file to stdout*/
+/* Prints the entered file to stdout*/
 void display(FILE *file){
 	int ch;
 	while((ch = fgetc(file)) != EOF){
@@ -33,14 +33,15 @@ void display(FILE *file){
 
 /* Same as display() but with line numbers*/
 void display_ln(FILE *file){ 
-	unsigned int count = 1;
+	static unsigned int count;
+	count++; //weird thing to get linenumbers to follow on concatenate files
 	int ch;
-	printf("%-6d ", count);
+	printf("%6d ", count);
 	while((ch = fgetc(file)) != EOF){
 		printf("%c", ch);
 		if(ch == '\n'){ //linenumbers
 				count++;
-				printf("%-6d ", count);
+				printf("%6d ", count);
 		}
 	}
 }
@@ -63,19 +64,20 @@ int main(int argc, char* argv[]){
                 break;
             case 'n':
 				p_flags.line_numbers = true;
-				o_files = 2; //don't read the  arguments
+				o_files = 2; //don't read the '-n'  argument
 				break;
 			default:
 				break;
 		}
 	}
-	int ch;
 	FILE* foofile;
     do{
         if(!(strcmp(argv[o_files], "-"))){ //read stdin
-            while((ch = fgetc(stdin)) != '\n'){
-                printf("%c", ch);
-            }
+			if(p_flags.line_numbers){ //yet to add the feature
+	            display_ln(stdin);
+        	}else{
+				display(stdin);
+            	}
             printf("\n");
         }else{ //read file
             foofile = fopen(argv[o_files], "r");
