@@ -9,3 +9,6 @@
 struct flags{
 	bool line_numbers;
 	} p_flags;
+
+/* Misc*/
+static unsigned int ln_count; //line numbers counter
