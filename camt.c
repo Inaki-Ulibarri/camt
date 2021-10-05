@@ -52,11 +52,12 @@ void display_stdi(){
 	while((ch = fgetc(stdin)) != '\n'){
 		printf("%c", ch);
 	}
+	printf("\n");
 }
 
 void display_ln_stdi(){
 	ln_count++;
-	char ch[1024];
+	char ch[1024]; //1023 characters seems reasonable for a single line of input
 	fgets(ch, 1023, stdin);
 	printf("%6d %s", ln_count, ch);
 }
@@ -89,16 +90,15 @@ int main(int argc, char* argv[]){
 	FILE* foofile; //the fun starts here
     do{
         if(!(strcmp(argv[o_files], "-"))){ //read stdin
-			if(p_flags.line_numbers){ //yet to add the feature
+			if(p_flags.line_numbers){ 
 	            display_ln_stdi();
 	            
         	}else{
 				display_stdi();
             	}
             	
-            printf("\n"); //for a nice prompt
         }else{ //read file
-            foofile = fopen(argv[o_files], "r"); //obligatory file error shenanigans
+            foofile = fopen(argv[o_files], "r"); 
             if(foofile == NULL){ //check if file was opened
 				printf("Error opening the file '%s'\n", argv[o_files]);
 				exit(1);
@@ -117,6 +117,6 @@ int main(int argc, char* argv[]){
         }
         
         o_files++;
-    }while(o_files < argc); //read until no more arguments can be read
+    }while(o_files < argc); //read until no more arguments are to be read
     return(EXIT_SUCCESS);
 }
