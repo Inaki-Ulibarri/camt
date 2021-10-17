@@ -1,4 +1,4 @@
-/* camt, a shitty cat copy made be Iñaki Ullibarri Utrilla*/
+/* camt, a shitty cat copy made by Iñaki Ullibarri Utrilla*/
 
 /* libraries*/
 #include "camt.h"
@@ -46,7 +46,7 @@ void display_ln(FILE *file){
 	}
 }
 
-/* Special display functions for stdin, work pretty much the same*/
+/* Special display functions for stdin, works pretty much the same*/
 void display_stdi(){
 	int ch;
 	while((ch = fgetc(stdin)) != '\n'){
@@ -74,11 +74,11 @@ int main(int argc, char* argv[]){
 		switch(opt){
 			case 'h':
 				print_help();
-                break;
+                		break;
 			case 'v':
 				print_version();
-                break;
-            case 'n':
+                		break;
+            		case 'n':
 				p_flags.line_numbers = true;
 				o_files = 2; //don't read '-n' as a file
 				break;
@@ -110,7 +110,6 @@ int main(int argc, char* argv[]){
 
 			}else{	
 				display(foofile);
-		        printf("\n"); 
 
 			}
             fclose(foofile);
